@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="circulos.css">
+    <details>1. Realiza un documento de nombre ejercicio1.html donde se muestren tres
+        círculos de distintos colores con sus respectivos botones de "ocultar".</details>
+    <title>ejercicio1</title>
+</head>
+<body>
+    <header id="cabecera">
+        <h1>CIRCULOS</h1>
+    </header>
+    <div id="contenido">
+        <div class="circulo">
+            <div id="circulo1" class="circulo circulo-rojo"></div>
+            <div id="circulo2" class="circulo circulo-verde"></div>
+            <div id="circulo3" class="circulo circulo-azul"></div>
+        </div>
+        <div class="botones">
+            <div id="div1">
+                <button onclick="ocultarCirculo('circulo1')">Mostrar/Ocultar <br>Circulo Rojo</button>
+            </div>
+        
+            <div id="div2">
+                <button onclick="ocultarCirculo('circulo2')">Mostrar/Ocultar <br>Circulo Verde</button>
+            </div>
+        
+            <div id="div3">
+                <button onclick="ocultarCirculo('circulo3')">Mostrar/Ocultar <br>Circulo Azul</button>
+            </div>
+        </div>
+    </div>
+    <script src="circulos.js"></script>
+</body>
+</html>
