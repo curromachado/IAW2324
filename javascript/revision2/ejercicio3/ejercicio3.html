@@ -4,19 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="ejercicio3.css">
 </head>
 <body>
-    <form action="">
-        Nombre: <input type="text" id="nombre"><br><br>
-        Apellido: <input type="text" id="apellido"><br><br>
-        Correo electrónico: <input type="text" id="correo"><br><br>
-        Dirección: <input type="text" id="direccion"><br><br>
-        Ciudad: <input type="text" id="ciudad"><br><br>
-        Teléfono: <input type="text" id="telefono"><br><br>
-        DNI: <input type="text" id="dni"><br><br>
-        PIN: <input type="text" id="pin1"><br><br>
-        PIN repetido: <input type="text" id="pin2"><br><br>
-    </form>
+    <form id="formularioRegistro" onsubmit="return validarFormulario()" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+      
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required><br>
+      
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required><br>
+      
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion"><br>
+      
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" name="ciudad"><br>
+      
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono"><br>
+      
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" maxlength="9" required>
+        <span id="dniError" class="error"></span><br>
+      
+        <label for="pin">PIN (8 dígitos):</label>
+        <input type="password" id="pin" name="pin" minlength="8" maxlength="8" required><br>
+      
+        <label for="pinRepetido">PIN repetido:</label>
+        <input type="password" id="pinRepetido" name="pinRepetido" minlength="8" maxlength="8" required>
+        <span id="pinError" class="error"></span><br>
+      
+        <input type="submit" value="Registrarse">
+      </form>
+      <p id="mensajeExito" class="success"></p>
     <script src="ejercicio3.js"></script>
 </body>
 </html>
