@@ -1,15 +1,12 @@
 <?php
-// Consulta SQL para contar el total de incidencias, las resueltas y las pendientes
 $queryTotal = "SELECT COUNT(*) AS total FROM incidencias";
 $queryResueltas = "SELECT COUNT(*) AS resueltas FROM incidencias WHERE estado = 'resuelta'";
 $queryPendientes = "SELECT COUNT(*) AS pendientes FROM incidencias WHERE estado = 'pendiente'";
 
-// Ejecutar las consultas y obtener los resultados
 $resultadoTotal = mysqli_query($conn, $queryTotal);
 $resultadoResueltas = mysqli_query($conn, $queryResueltas);
 $resultadoPendientes = mysqli_query($conn, $queryPendientes);
 
-// Obtener los valores de los resultados
 $totalIncidencias = mysqli_fetch_assoc($resultadoTotal)['total'];
 $resueltas = mysqli_fetch_assoc($resultadoResueltas)['resueltas'];
 $pendientes = mysqli_fetch_assoc($resultadoPendientes)['pendientes'];

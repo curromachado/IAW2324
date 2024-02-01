@@ -3,22 +3,18 @@
 <?php
 session_start();
 
-// Verificar si el usuario está autenticado
 if (!isset($_SESSION['usuario'])) {
-    // Si no está autenticado, redirigir a la página de inicio de sesión
     header("Location: login.php");
     exit();
 }
 
-// Procesar el formulario de registro si se envía
+
 if ($_POST) {
-    // Obtener los datos del formulario
     $usuario = htmlspecialchars($_POST["usuario"]);
     $contrasena = htmlspecialchars($_POST["contrasena"]);
     $rol = htmlspecialchars($_POST["rol"]);
     $contrasena_codificada = base64_encode($contrasena);
 
-    // Insertar el nuevo usuario en la base de datos
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn) {
         $query = "INSERT INTO usuarios (usuario, contrasena, rol) VALUES ('$usuario', '$contrasena_codificada', '$rol')";
@@ -77,6 +73,7 @@ if ($_POST) {
                     <table class="table table-bordered rounded table-hover custom-table">
                         <thead class="text-white text-center" style="background-color: #154c79">
                             <tr>
+                                <th scope="col">ID</th> 
                                 <th scope="col">Usuario</th>
                                 <th scope="col">Rol</th>
                                 <th scope="col" colspan="2" class="text-center">Operaciones</th>
@@ -88,14 +85,15 @@ if ($_POST) {
                             $result = mysqli_query($conn, $query);
 
                             while ($row = mysqli_fetch_assoc($result)) {
+                                $id = $row['id_usuario'];
                                 $usuario = $row['usuario'];
                                 $rol = $row['rol'];
 
                                 echo "<tr>";
+                                echo "<td>{$id}</td>";
                                 echo "<td>{$usuario}</td>";
                                 echo "<td>{$rol}</td>";
-                                echo "<td class='text-center'><a href='#' class='btn btn-secondary'><i class='bi bi-pencil'></i></a></td>";
-                                echo "<td class='text-center'><a href='#' class='btn btn-danger'><i class='bi bi-trash'></i></a></td>";
+                                echo "<td class='text-center'><a href='eliminar_usuario.php?id={$id}' class='btn btn-danger'><i class='bi bi-trash'></i> Eliminar</a></td>";
                                 echo "</tr>";
                             }
                             ?>
@@ -108,7 +106,7 @@ if ($_POST) {
 </div>
 
 <div class="container text-center mt-5">
-    <a href="index.php" class="btn btn-warning mb-5">Volver</a>
+    <a href="admin_page.php" class="btn btn-warning mb-5">Volver</a>
 </div>
 
 <?php include "../footer.php" ?>

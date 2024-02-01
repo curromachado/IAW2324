@@ -10,7 +10,6 @@ if(isset($_POST['crear'])) {
     $revision = htmlspecialchars($_POST['revision']);
     $resolucion = htmlspecialchars($_POST['resolucion']);
   
-    // Modifica la consulta para insertar los valores en la tabla
     $query= "INSERT INTO incidencias(id_planta, id_aula, descripcion, fecha_alta, comentarios, fecha_revision, fecha_resolucion) 
              VALUES('{$planta}','{$aula}','{$descripcion}','{$alta}','{$comentario}','{$revision}','{$resolucion}')";
 
@@ -60,7 +59,7 @@ $fechaHoy = date("Y-m-d"); //Esto me va a servir para no poder seleccionar días
             <input type="date" name="resolucion"  class="form-control" value="">
         </div>
         <div class="form-group">
-            <label for="revision" class="form-label">Fecha Revsion</label>
+            <label for="revision" class="form-label">Fecha Revision</label>
             <input type="date" name="revision"  class="form-control" value="">
         </div>
         <div class="form-group">
@@ -83,46 +82,32 @@ document.addEventListener('DOMContentLoaded', function () {
     var plantaSelect = document.getElementById('plantaSelect');
     var aulaSelect = document.getElementById('aulaSelect');
 
-    // Definir opciones de Aula para cada Planta
     var opcionesAula = {
         1: [{ nombre: 'Aula 1', id: '1' }, { nombre: 'Aula 2', id: '2' }, { nombre: 'Aula 3', id: '3' }],
         2: [{ nombre: 'Aula 4', id: '4' }, { nombre: 'Aula 5', id: '5' }, { nombre: 'Aula 6', id: '6' }],
         3: [{ nombre: 'Aula 7', id: '7' }, { nombre: 'Aula 8', id: '8' }, { nombre: 'Aula 9', id: '9' }]
     };
 
-    // Función para actualizar las opciones del campo de "Aula" según la "Planta" seleccionada
     function actualizarOpcionesAula() {
-        console.log("Función actualizarOpcionesAula llamada");
-        // Obtener el valor seleccionado en el campo de "Planta"
         var plantaSeleccionada = plantaSelect.value;
-        console.log("Planta seleccionada:", plantaSeleccionada);
 
-        // Limpiar las opciones actuales del campo de "Aula"
         aulaSelect.innerHTML = '';
-        console.log("Opciones de Aula eliminadas");
 
-        // Agregar las nuevas opciones según la "Planta" seleccionada
         opcionesAula[plantaSeleccionada].forEach(function (aula) {
             var option = document.createElement('option');
-            option.value = aula.id; // Usar el id como valor
-            option.text = aula.nombre; // Usar el nombre como texto visible
-            aulaSelect.appendChild(option); // Añadir opción al select
-            console.log("Aula añadida:", aula.nombre);
+            option.value = aula.id;
+            option.text = aula.nombre;
+            aulaSelect.appendChild(option);
         });
     }
 
-    // Evento change para el campo de "Planta"
     plantaSelect.addEventListener('change', function () {
-        console.log("Evento change en plantaSelect detectado");
-        // Actualizar las opciones del campo de "Aula" al cambiar la "Planta"
         actualizarOpcionesAula();
     });
 
-    // Llamar a la función para asegurarse de que las opciones estén configuradas correctamente al cargar la página
     console.log("Inicializando opciones de Aula");
     actualizarOpcionesAula();
 });
 </script>
 
 <?php include "../footer.php" ?>
-

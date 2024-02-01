@@ -28,7 +28,6 @@
                     <input type="password" name="contrasena" class="form-control" placeholder="Escribe una contraseña" required>
                 </div>
 
-                <!-- Agrega el campo de selección para el rol -->
                 <div class="mb-3 input-group">
                     <span class="input-group-text">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -66,15 +65,13 @@
                 $conn = new mysqli($servername, $username, $password, $dbname);
 
                 if ($conn) {
-                    // Construye y ejecuta la consulta SQL
                     $query = "SELECT usuario FROM usuarios WHERE usuario='" . mysqli_real_escape_string($conn, $usuario) . "'";
                     $result = mysqli_query($conn, $query);
 
-                    // Verifica si se encuentra un usuario coincidente
+
                     if (mysqli_num_rows($result) > 0) {
                         echo "<p class='text-danger'>Ese nombre de usuario ya está registrado. Intenta con otro</p>";
                     } else {
-                        // Añadir a nuestro usuario a la BD
                         $query = "INSERT INTO usuarios (usuario, contrasena, rol) VALUES('" . mysqli_real_escape_string($conn, $usuario) . "','" . mysqli_real_escape_string($conn, $contrasena_codificada) . "','" . mysqli_real_escape_string($conn, $rol) . "')";
                         if (mysqli_query($conn, $query)) {
                             echo "<p class='success'>¡Enhorabuena! Has registrado tu cuenta</p>";
@@ -83,7 +80,6 @@
                         }
                     }
                 } else {
-                    // Muestra un error si la conexión a MySQL falla
                     echo "<p class='text-danger'>Error: No se pudo conectar a MySQL.</p>";
                     echo "<p class='text-danger'>error de depuración: " . mysqli_connect_errno() . "</p>";
                     echo "<p class='text-danger'>error de depuración: " . mysqli_connect_error() . "</p>";

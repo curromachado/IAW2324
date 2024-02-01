@@ -21,7 +21,6 @@
             </thead>
             <tbody class="text-center">
                 <?php
-                // Consulta SQL con unión entre incidencias, aulas y plantas
                 $query = "SELECT incidencias.*, plantas.nombre_planta, aulas.nombre_aula 
                           FROM incidencias 
                           INNER JOIN plantas ON incidencias.id_planta = plantas.id 
@@ -30,8 +29,8 @@
                 $vista_incidencias = mysqli_query($conn, $query);
 
                 while ($row = mysqli_fetch_assoc($vista_incidencias)) {
-                    $planta = $row['nombre_planta']; // Usar el nombre de la planta en lugar del ID
-                    $aula = $row['nombre_aula']; // Usar el nombre del aula en lugar del ID
+                    $planta = $row['nombre_planta']; 
+                    $aula = $row['nombre_aula']; 
                     $descripcion = $row['descripcion'];
                     $alta = $row['fecha_alta'];
                     $comentario = $row['comentarios'];

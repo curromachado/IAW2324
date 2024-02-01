@@ -11,21 +11,20 @@ if ($_POST) {
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn) {
-        // Construye y ejecuta la consulta SQL
+
         $query = "SELECT * FROM usuarios WHERE usuario='" . mysqli_real_escape_string($conn, $usuario) . "' AND contrasena='" . mysqli_real_escape_string($conn, $contrasena_codificada) . "'";
         $result = mysqli_query($conn, $query);
 
-        // Verifica si se encuentra un usuario coincidente
+
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
 
-            // Verifica si el usuario tiene el rol de "administrador" o "direccion"
+
             if ($row['rol'] == 'administrador' || $row['rol'] == 'direccion') {
-                // Iniciar sesión y almacenar información del usuario
+
                 $_SESSION['usuario'] = $row['usuario'];
                 $_SESSION['rol'] = $row['rol'];
 
-                // Redirige a la página correspondiente
                 if ($row['rol'] == 'administrador') {
                     header("Location: admin_page.php");
                     exit();
@@ -40,7 +39,7 @@ if ($_POST) {
             echo "<p class='text-danger'>Acceso denegado</p>";
         }
     } else {
-        // Muestra un error si la conexión a MySQL falla
+
         echo "<p class='text-danger'>Error: No se pudo conectar a MySQL.</p>";
         echo "<p class='text-danger'>error de depuración: " . mysqli_connect_errno() . "</p>";
         echo "<p class='text-danger'>error de depuración: " . mysqli_connect_error() . "</p>";

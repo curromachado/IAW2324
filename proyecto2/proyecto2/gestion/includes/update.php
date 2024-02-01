@@ -9,14 +9,14 @@ if(isset($_GET['incidencia_id'])) {
 
     while($row = mysqli_fetch_assoc($vista_incidencias)) {
         $id = $row['id'];                
-        $planta = $row['id_planta']; // Cambiado a id_planta        
-        $aula = $row['id_aula']; // Cambiado a id_aula         
+        $planta = $row['id_planta'];        
+        $aula = $row['id_aula'];      
         $descripcion = $row['descripcion'];        
         $alta = $row['fecha_alta'];        
         $revision = $row['fecha_revision'];        
         $resolucion = $row['fecha_resolucion'];        
         $comentario = $row['comentarios'];
-        $estado = $row['estado']; // Nuevo campo de estado
+        $estado = $row['estado']; 
     }
 
     if(isset($_POST['editar'])) {
@@ -27,7 +27,7 @@ if(isset($_GET['incidencia_id'])) {
         $revision = htmlspecialchars($_POST['revision']);
         $resolucion = htmlspecialchars($_POST['resolucion']);
         $comentario = htmlspecialchars($_POST['comentario']);
-        $estado = htmlspecialchars($_POST['estado']); // Nuevo campo de estado
+        $estado = htmlspecialchars($_POST['estado']); 
 
         $query = "UPDATE incidencias SET id_planta = '{$planta}' , id_aula = '{$aula}' , descripcion = '{$descripcion}', fecha_alta = '{$alta}', fecha_revision = '{$revision}', fecha_resolucion = '{$resolucion}', comentarios = '{$comentario}', estado = '{$estado}' WHERE id = {$id}";
         $incidencia_actualizada = mysqli_query($conn, $query);
@@ -40,7 +40,7 @@ if(isset($_GET['incidencia_id'])) {
     }
 }
 
-$fechaHoy = date("Y-m-d"); // Esto me va a servir para no poder seleccionar días futuros
+$fechaHoy = date("Y-m-d"); 
 ?>
 
 <div class="container">
@@ -123,42 +123,36 @@ document.addEventListener('DOMContentLoaded', function () {
     var plantaSelect = document.getElementById('plantaSelect');
     var aulaSelect = document.getElementById('aulaSelect');
 
-    // Definir opciones de Aula para cada Planta
     var opcionesAula = {
         1: [{ nombre: 'Aula 1', id: '1' }, { nombre: 'Aula 2', id: '2' }, { nombre: 'Aula 3', id: '3' }],
         2: [{ nombre: 'Aula 4', id: '4' }, { nombre: 'Aula 5', id: '5' }, { nombre: 'Aula 6', id: '6' }],
         3: [{ nombre: 'Aula 7', id: '7' }, { nombre: 'Aula 8', id: '8' }, { nombre: 'Aula 9', id: '9' }]
     };
 
-    // Función para actualizar las opciones del campo de "Aula" según la "Planta" seleccionada
+
     function actualizarOpcionesAula() {
         console.log("Función actualizarOpcionesAula llamada");
-        // Obtener el valor seleccionado en el campo de "Planta"
         var plantaSeleccionada = plantaSelect.value;
         console.log("Planta seleccionada:", plantaSeleccionada);
 
-        // Limpiar las opciones actuales del campo de "Aula"
         aulaSelect.innerHTML = '';
         console.log("Opciones de Aula eliminadas");
 
-        // Agregar las nuevas opciones según la "Planta" seleccionada
         opcionesAula[plantaSeleccionada].forEach(function (aula) {
             var option = document.createElement('option');
-            option.value = aula.id; // Usar el id como valor
-            option.text = aula.nombre; // Usar el nombre como texto visible
-            aulaSelect.appendChild(option); // Añadir opción al select
+            option.value = aula.id;
+            option.text = aula.nombre; 
+            aulaSelect.appendChild(option);
             console.log("Aula añadida:", aula.nombre);
         });
     }
 
-    // Evento change para el campo de "Planta"
     plantaSelect.addEventListener('change', function () {
         console.log("Evento change en plantaSelect detectado");
-        // Actualizar las opciones del campo de "Aula" al cambiar la "Planta"
         actualizarOpcionesAula();
     });
 
-    // Llamar a la función para asegurarse de que las opciones estén configuradas correctamente al cargar la página
+
     console.log("Inicializando opciones de Aula");
     actualizarOpcionesAula();
 });

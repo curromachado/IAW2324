@@ -3,9 +3,7 @@ include "../header.php";
 
 session_start();
 
-// Verificar si el usuario está autenticado
 if (!isset($_SESSION['usuario'])) {
-    // Si no está autenticado, redirigir a la página de inicio de sesión
     header("Location: login.php");
     exit();
 }
@@ -17,7 +15,7 @@ if (!isset($_SESSION['usuario'])) {
         <h1 class="text-center">Gestión de Incidencias (CRUD)</h1>
     </div>
     <a href="create.php" class="btn btn-success btn-lg mb-3"><i class="bi bi-plus"></i> Añadir Incidencia</a>
-
+    <?php include "actualizacion_incidencia.php"?>
     <div class="table-responsive rounded">
         <table class="table table-bordered rounded table-hover custom-table">
             <thead class="text-white text-center" style="background-color: #154c79">
@@ -34,7 +32,6 @@ if (!isset($_SESSION['usuario'])) {
             </thead>
             <tbody class="text-center">
                 <?php
-                // Consulta SQL con unión entre incidencias, aulas y plantas
                 $query = "SELECT incidencias.*, plantas.nombre_planta, aulas.nombre_aula 
                           FROM incidencias 
                           INNER JOIN plantas ON incidencias.id_planta = plantas.id 
